@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="de" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Bestellung</title>
+
+</head>
+<body>
+<h2> Bestellungen</h2>
+<table>
+    <thead>
+ <tr>
+     <td>Artikel</td>
+     <td>Bezeichnung</td>
+     <td>Kunde</td>
+     <td>Montag</td>
+     <td>Dienstag</td>
+     <td>Mittwoch</td>
+     <td>Donnerstag</td>
+     <td>Freitag</td>
+     <td>Samstag</td>
+     <td> Gesamtmenge</td>
+ </tr>
+    </thead>
+ <form action="" method="post">
+
+ <tbody th:each="order, gesamt : ${orders}">
+<td th:text="${order.getBread().articleNumber}"></td>
+<td th:text="${order.getBread().name}"></td>
+<td th:text="${order.getClient().name}"></td>
+<td><input th:value="${order.getOrders()[0]}" type="number" th:min="0"></td>
+<td><input th:value="${order.getOrders()[1]}" type="number" th:min="0"></td>
+<td><input th:value="${order.getOrders()[2]}" type="number" th:min="0"></td>
+<td><input th:value="${order.getOrders()[3]}" type="number" th:min="0"></td>
+<td><input th:value="${order.getOrders()[4]}" type="number" th:min="0"></td>
+<td><input th:value="${order.getOrders()[5]}" type="number" th:min="0"></td>
+    <td th:text="${#aggregates.sum(order.getOrders())}">154</td>
+
+</form>
+<button type="submit">Speichern</button>
+
+</tbody>
+
+
+</table>
+
+
+</body>
+</html>

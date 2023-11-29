@@ -1,6 +1,6 @@
 package com.example.luluapp.rest.restControllers;
 
-import com.example.luluapp.rest.models.OrderList;
+import com.example.luluapp.rest.models.Order;
 import com.example.luluapp.rest.service.OrderService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,11 +19,11 @@ public class OrderRestController {
         this.orderService = orderService;
     }
     @GetMapping("/orders")
-    public List<OrderList> getAllOrders(){
+    public List<Order> getAllOrders(){
         return this.orderService.getAllOrders();
     }
     @GetMapping("orders/{id}")
-    public OrderList getById(@PathVariable Long id ){
+    public Order getById(@PathVariable Long id ){
         return orderService.findById(id);
 
 

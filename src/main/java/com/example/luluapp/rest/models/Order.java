@@ -10,7 +10,7 @@ import lombok.*;
 @Table(name = "ORDERS")
 @Data
 
-public class OrderList {
+public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
