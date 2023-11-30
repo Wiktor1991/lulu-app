@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.Arrays;
 import java.util.List;
@@ -21,11 +22,7 @@ public class OrderViewController {
         this.orderService = orderService;
     }
 
-    @GetMapping("/home")
-    public String homePage() {
 
-        return "index";
-    }
     @GetMapping("/orders")
     public String getOrders(Model model) {
         List<Order> orderList = orderService.getAllOrders();
@@ -35,14 +32,11 @@ public class OrderViewController {
             sum.set(Arrays.stream(order.getOrders())
                     .sum());
         });
-
-
-
         model.addAttribute("orders", orderList);
-        model.addAttribute("sum",sum);
-
-
         return "orders";
     }
-
+    @PostMapping("home")
+    public String goToHomePage(){
+        return "redirect/home";
+    }
 }

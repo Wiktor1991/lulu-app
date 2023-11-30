@@ -57,13 +57,13 @@ public class DataInitializer {
                 .clientNumber(100648L)
                 .tour("97")
                 .name("Rewe Adolf")
-                .city("Fürstenwalde")
+                .city("Furstenwalde")
                 .build();
         Client kaufland = Client.builder()
                 .clientNumber(100526L)
                 .tour("158")
                 .name("Kaufland Heilbronnerstr")
-                .city("Frankfurt/Oder")
+                .city("Frankfurt Oder")
                 .build();
         this.clientService.addClient(edeka);
         this.clientService.addClient(rewe);

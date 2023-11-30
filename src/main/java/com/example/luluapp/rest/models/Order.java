@@ -1,5 +1,6 @@
 package com.example.luluapp.rest.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -18,5 +19,6 @@ public class Order {
     Client client;
     @ManyToOne(fetch = FetchType.EAGER,  cascade = CascadeType.MERGE)
     Bread bread;
+    @JsonProperty("orders")
     int[] orders ;
 }
