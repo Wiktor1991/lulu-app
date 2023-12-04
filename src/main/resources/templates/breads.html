@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="de" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Books</title>
+
+    <h1>Welcome to breads controller</h1>
+
+
+    <form th:object="${breads}" method="post" action="/edit">
+        <fieldset>
+            <input type="submit" id="submitButton" th:value="Save">
+            <input type="reset" id="resetButton" name="reset" th:value="Reset"/>
+            <table>
+                <thead>
+                <tr>
+                    <th> Bezeichnung</th>
+                    <th> Artikel</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="bread, itemStat : *{breads}">
+                    <td><input th:field="*{breads[__${itemStat.index}__].name}" /></td>
+                    <td><input th:field="*{breads[__${itemStat.index}__].articleNumber}" /></td>
+                </tr>
+                </tbody>
+            </table>
+        </fieldset>
+    </form>

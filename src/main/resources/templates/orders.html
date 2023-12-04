@@ -7,46 +7,52 @@
 </head>
 <body>
 <h2> Bestellungen</h2>
+
 <table>
     <thead>
- <tr>
-     <td>Artikel</td>
-     <td>Bezeichnung</td>
-     <td>Kunde</td>
-     <td>Montag</td>
-     <td>Dienstag</td>
-     <td>Mittwoch</td>
-     <td>Donnerstag</td>
-     <td>Freitag</td>
-     <td>Samstag</td>
-     <td> Gesamtmenge</td>
- </tr>
+    <tr>
+        <td>Artikel</td>
+        <td>Bezeichnung</td>
+        <td>Kunde</td>
+        <td>Montag</td>
+        <td>Dienstag</td>
+        <td>Mittwoch</td>
+        <td>Donnerstag</td>
+        <td>Freitag</td>
+        <td>Samstag</td>
+        <td> Gesamtmenge</td>
+    </tr>
     </thead>
- <form action="" method="post">
+    <form  th:object="${orders}"  method="post" action="/update">
+        <fieldset>
+        <tbody th:each="order, itemStatus: *{orderList}">
+        <td th:text="*{orderList[__${itemStatus.index}__].bread.getName()}"></td>
+        <td th:text="*{orderList[__${itemStatus.index}__].bread.getArticleNumber()}"></td>
+        <td th:text="*{orderList[__${itemStatus.index}__].client.getName()}"></td>
+        <td><input th:field="*{orderList[__${itemStatus.index}__].orders[0]}" type="number" th:min="0"></td>
+        <td><input th:field="*{orderList[__${itemStatus.index}__].orders[1]}" type="number" th:min="0"></td>
+        <td><input th:field="*{orderList[__${itemStatus.index}__].orders[2]}" type="number" th:min="0"></td>
+        <td><input th:field="*{orderList[__${itemStatus.index}__].orders[3]}" type="number" th:min="0"></td>
+        <td><input th:field="*{orderList[__${itemStatus.index}__].orders[4]}" type="number" th:min="0"></td>
+        <td><input th:field="*{orderList[__${itemStatus.index}__].orders[5]}" type="number" th:min="0"></td>
+        <td><input th:type="hidden" th:field="*{orderList[__${itemStatus.index}__].bread}" ></td>
+        <td><input th:type="hidden" th:field="*{orderList[__${itemStatus.index}__].client}" ></td>
+        <td><input th:type="hidden" th:field="*{orderList[__${itemStatus.index}__].id}" ></td>
 
- <tbody th:each="order, gesamt : ${orders}">
-<td th:text="${order.getBread().articleNumber}"></td>
-<td th:text="${order.getBread().name}"></td>
-<td th:text="${order.getClient().name}"></td>
-<td><input th:value="${order.getOrders()[0]}" type="number" th:min="0"></td>
-<td><input th:value="${order.getOrders()[1]}" type="number" th:min="0"></td>
-<td><input th:value="${order.getOrders()[2]}" type="number" th:min="0"></td>
-<td><input th:value="${order.getOrders()[3]}" type="number" th:min="0"></td>
-<td><input th:value="${order.getOrders()[4]}" type="number" th:min="0"></td>
-<td><input th:value="${order.getOrders()[5]}" type="number" th:min="0"></td>
-    <td th:text="${#aggregates.sum(order.getOrders())}">154</td>
+        <td th:text="${#aggregates.sum(order.getOrders())}">154</td>
+        </fieldset>
 
-</form>
-<button type="submit">Speichern</button>
+    <button type="submit">Speichern</button>
+    </form>
 
-</tbody>
 
+    </tbody>
 
 </table>
 
 
-</body>
 <footer>
     <a th:href="@{/home}">Zurück</a>
 </footer>
+</body>
 </html>

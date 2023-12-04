@@ -52,4 +52,12 @@ public class OrderService {
          }).orElseThrow(()-> new RuntimeException("Error! Order with given id does not exist!  "));
          return null;
     }
+
+    public List<Order> findAll() {
+      return  orderRepository.findAll();
+    }
+
+    public List<Order> saveAll(List<Order> orders){
+        return orderRepository.saveAll(orders);
+    }
 }

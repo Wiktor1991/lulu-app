@@ -1,15 +1,14 @@
 package com.example.luluapp.web.mvcControllers;
-import com.example.luluapp.rest.models.Order;
+import com.example.luluapp.rest.models.Bread;
 import com.example.luluapp.rest.service.OrderService;
+import com.example.luluapp.web.dto.OrderCreationDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 
 
 @Controller
@@ -25,18 +24,33 @@ public class OrderViewController {
 
     @GetMapping("/orders")
     public String getOrders(Model model) {
-        List<Order> orderList = orderService.getAllOrders();
-        AtomicInteger sum = new AtomicInteger();
+        OrderCreationDto orders = new OrderCreationDto();
+        orderService.findAll().iterator().forEachRemaining(orders::addOrder);
 
-        orderList.forEach(order -> {
-            sum.set(Arrays.stream(order.getOrders())
-                    .sum());
-        });
-        model.addAttribute("orders", orderList);
+        model.addAttribute("orders", orders);
+
         return "orders";
     }
+
+    @PostMapping("/update")
+        public String update(@ModelAttribute OrderCreationDto orders){
+
+        orders.getOrderList().stream().forEach(System.out::println);
+
+        orders.getOrderList().forEach(order -> {
+            orderService.addOrder(order);
+        });
+
+
+
+
+        return "redirect:/orders";
+
+
+    }
+
     @PostMapping("home")
     public String goToHomePage(){
-        return "redirect/home";
+        return "redirect:/home";
     }
 }

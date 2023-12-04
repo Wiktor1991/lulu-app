@@ -22,4 +22,6 @@ public class Client {
     String name;
     String city;
     String tour;
+
 }
+

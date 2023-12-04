@@ -11,6 +11,7 @@ import lombok.*;
 @Table(name = "ORDERS")
 @Data
 
+
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,4 +22,6 @@ public class Order {
     Bread bread;
     @JsonProperty("orders")
     int[] orders ;
+
+
 }

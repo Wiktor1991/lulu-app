@@ -17,4 +17,5 @@ public class Bread {
     private String name;
     private Integer articleNumber;
     private String picture;
+
 }
