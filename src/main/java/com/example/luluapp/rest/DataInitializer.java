@@ -29,18 +29,18 @@ public class DataInitializer {
            Bread brot1 = Bread.builder()
                    .articleNumber(67)
                    .name("UnsereMildes500")
-                   .picture("bild0")
+                   .picture("https://img.rewe-static.de/4922506/3488850_digital-image.png?impolicy=s-products&imwidth=1080&output-format=image/webp")
                    .build();
 
            Bread brot2 = Bread.builder()
                    .articleNumber(64)
                    .name("volkorntoast")
-                   .picture("bild1").build();
+                   .picture("https://img.rewe-static.de/4922506/3488850_digital-image.png?impolicy=s-products&imwidth=1080&output-format=image/webp").build();
 
            Bread brot3 = Bread.builder()
                    .articleNumber(108)
                    .name("Weissbrot750")
-                   .picture(" bild3")
+                   .picture("https://img.rewe-static.de/4922239/5332540_digital-image.png?impolicy=s-products&imwidth=1080&output-format=image/webp")
                    .build();
 
            this.breadService.addBread(brot1);
@@ -50,7 +50,7 @@ public class DataInitializer {
            Client edeka = Client.builder()
                 .clientNumber(100204L)
                 .tour("98")
-                .name("Edeka Wilde")
+                .name("Edeka")
                 .city("Friedersdorf")
                 .build();
         Client rewe = Client.builder()

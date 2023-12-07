@@ -3,12 +3,15 @@ package com.example.luluapp.rest.restControllers;
 import com.example.luluapp.rest.models.Order;
 import com.example.luluapp.rest.service.OrderService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("api/")
+@CrossOrigin("*")
 public class OrderRestController {
 
     private final OrderService orderService;
@@ -34,9 +37,9 @@ public class OrderRestController {
     }
 
 
-//    @PostMapping("orders/{id}")
-//    public Order updateOrder(@PathVariable Long id,
-//                             @RequestBody Order order){
-//        return orderService.updateOrderById(order);
-//    }
+    @PostMapping("orders/{id}")
+    public Order updateOrder(@PathVariable Long id,
+                             @RequestBody Order order){
+        return orderService.updateOrderById(order);
+    }
 }
