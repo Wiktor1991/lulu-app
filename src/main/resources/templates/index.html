@@ -1,6 +1,7 @@
-<html>
+<!doctype html>
+<html lang="de" xmlns:th="http://www.thymeleaf.org" >
 <h1>
-    Welcome from new View controller
+   Tour interface
 </h1>
 
 <body>
@@ -10,9 +11,15 @@
     <nav>
         <a href="/orders">Zu Bestellungen</a>
         <a href="/out">Abmelden</a>
-        <a href="/save">Brot neu einlisten</a>
+        <a href="#">NIEWIEM</a>
     </nav>
 </div>
 
+<h1 th:text="|Tour ${tor}|"></h1>
+
+<from></from>
+<ul th:each="client: ${clients}">
+    <li th:text="${client.client.getName()}"></li>
+</ul>
 </body>
 </html>
