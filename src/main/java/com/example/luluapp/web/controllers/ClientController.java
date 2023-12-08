@@ -34,7 +34,6 @@ public class ClientController {
         orders.stream().filter(order -> order.getClient().getTour().equals(tourNumber))
                 .forEach(ordersByTour::add);
 
-
         model.addAttribute("clients", ordersByTour);
         model.addAttribute("tourNumber",tourNumber);
         model.addAttribute("client", client);
@@ -45,7 +44,6 @@ public class ClientController {
     public String orders(@RequestParam String client, RedirectAttributes redirectAttributes){
 
         redirectAttributes.addAttribute("client", client);
-
         return "redirect:/orders";
     }
 

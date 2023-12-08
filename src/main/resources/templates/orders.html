@@ -5,8 +5,26 @@
     <title>Bestellung</title>
 
 </head>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+<style>
+    .sum{
+        text-align: left;
+    }
+    .myclass{
+        width: 50%;
+        margin: 10px auto;
+    }
+    table{
+        margin: 0 auto;
+        width: 20%;
+
+    }
+
+</style>
 <body>
 <h2> Bestellungen</h2>
+
 
 <table>
     <thead>
@@ -21,16 +39,15 @@
         <td>Donnerstag</td>
         <td>Freitag</td>
         <td>Samstag</td>
-        <td> Gesamtmenge</td>
     </tr>
     </thead>
-    <form  th:object="${orders}"  method="post" action="/update">
+    <form id="form" th:object="${orders}"  method="post" action="/update">
         <fieldset>
         <tbody th:each="order, itemStatus: *{orderList}">
         <td th:text="*{orderList[__${itemStatus.index}__].bread.getName()}"></td>
         <td><img th:src="*{orderList[__${itemStatus.index}__].bread.getPicture()}" width="40px" height="40px"></td>
         <td th:text="*{orderList[__${itemStatus.index}__].bread.getArticleNumber()}"></td>
-        <td th:name="client" th:text="*{orderList[__${itemStatus.index}__].client.getName()}"></td>
+        <td  th:name="client" th:text="*{orderList[__${itemStatus.index}__].client.getName()}"></td>
         <td><input th:field="*{orderList[__${itemStatus.index}__].orders[0]}" type="number" th:min="0"></td>
         <td><input th:field="*{orderList[__${itemStatus.index}__].orders[1]}" type="number" th:min="0"></td>
         <td><input th:field="*{orderList[__${itemStatus.index}__].orders[2]}" type="number" th:min="0"></td>
@@ -39,24 +56,22 @@
         <td><input th:field="*{orderList[__${itemStatus.index}__].orders[5]}" type="number" th:min="0"></td>
         <td><input th:type="hidden" th:field="*{orderList[__${itemStatus.index}__].bread}" ></td>
         <td><input th:type="hidden" th:field="*{orderList[__${itemStatus.index}__].client}" ></td>
+        <td class="sum" th:text="${#aggregates.sum(order.getOrders())}"></td>
         <td><input th:type="hidden" th:field="*{orderList[__${itemStatus.index}__].id}" ></td>
-
-        <td th:text="${#aggregates.sum(order.getOrders())}">154</td>
         </fieldset>
 
-    <button type="submit">Speichern</button>
+
     </form>
     </tbody>
 </table>
 
-<ul th:each="tour: ${tur}">
-    <li th:text="${tour}"></li>
 
-</ul>
+
 
 
 <footer>
-    <a th:href="@{/}">Zurück</a>
+    <button form="form" type="submit" class="btn btn-secondary btn-lg btn-block myclass" >Speichern</button>
+    <a th:href="@{/}"  type="submit" class="btn btn-secondary btn-lg btn-block myclass">Zurück</a>
 </footer>
 </body>
 </html>

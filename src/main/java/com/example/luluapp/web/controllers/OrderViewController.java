@@ -22,6 +22,7 @@ public class OrderViewController {
 
     @GetMapping("/orders")
     public String getOrders(Model model, @RequestParam String client) {
+        String tour = "";
 
         OrderCreationDto orders = new OrderCreationDto();
         orderService.findAll().stream().filter(order -> order.getClient().getName().equals(client))
@@ -33,7 +34,8 @@ public class OrderViewController {
     }
 
     @PostMapping("/update")
-        public String update(@ModelAttribute OrderCreationDto orders, RedirectAttributes redirectAttributes){
+        public String update(@ModelAttribute OrderCreationDto orders,
+                             RedirectAttributes redirectAttributes){
         String client =
         orders.orderList.stream().findFirst().map(order -> order.getClient().getName()).orElse("");
 
@@ -41,8 +43,19 @@ public class OrderViewController {
 
         orders.getOrderList().forEach(orderService::addOrder);
         return "redirect:/orders";
-
     }
+    @PostMapping("/return")
+    public String goBack(@ModelAttribute OrderCreationDto orders,
+                         RedirectAttributes redirectAttributes){
+        String tourNumber = orders.orderList.stream().findFirst()
+                .map(order -> order.getClient().getTour()).orElse("");
+        log.info("*************" + tourNumber);
+        redirectAttributes.addAttribute("tourNumber", tourNumber);
+
+        return "redirect:/clients";
+    }
+
+
 
     @GetMapping("home")
     public String goToHomePage(){
