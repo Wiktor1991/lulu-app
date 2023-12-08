@@ -9,9 +9,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-
-
 @Controller
 @Slf4j
 public class OrderViewController {
@@ -42,9 +39,7 @@ public class OrderViewController {
 
         redirectAttributes.addAttribute("client", client);
 
-        orders.getOrderList().forEach(order -> {
-            orderService.addOrder(order);
-        });
+        orders.getOrderList().forEach(orderService::addOrder);
         return "redirect:/orders";
 
     }
