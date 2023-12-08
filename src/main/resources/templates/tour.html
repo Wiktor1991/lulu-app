@@ -30,15 +30,13 @@
 <table>
     <tr>
         <td>Tour</td>
-        <td>Action</td>
     </tr>
-    <form action="/sa" method="post" th:object="${tourNumber}"  th:each="tour: ${toures}">
+    <form action="/tour" method="post" th:object="${tourNumber}"  th:each="tour: ${toures}">
 
     <tbody>
-    <td th:text="${tour}"></td>
     <td>
         <input type="hidden" name="tor" th:value="${tour}">
-        <button type="submit">Wähle</button>
+        <button type="submit" th:text="${tour}">Wähle</button>
     </td>
     </tbody>
 </form>

@@ -1,5 +1,6 @@
 package com.example.luluapp.web.controllers;
 
+import com.example.luluapp.rest.models.Bread;
 import com.example.luluapp.rest.service.BreadService;
 import com.example.luluapp.web.dto.BreadCreationDto;
 import lombok.extern.slf4j.Slf4j;
@@ -12,33 +13,28 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 @Slf4j
-public class ViewController {
+public class NewArticleController {
 
     private final BreadService breadService;
 
-    public ViewController(BreadService breadService) {
+    public NewArticleController(BreadService breadService) {
         this.breadService = breadService;
     }
 
     @GetMapping("/save")
     public String addBread(Model model){
-        BreadCreationDto breads = new BreadCreationDto();
-        breadService.getAllBreads().iterator().forEachRemaining(bread -> breads.addBread(bread));
-
-        model.addAttribute("breads", breads);
+        Bread bread1 = new Bread();
+        model.addAttribute("bread",bread1);
 
         return "breads";
     }
 
     @PostMapping("/edit")
-    public String updateBread(@ModelAttribute BreadCreationDto breads, Model model){
+    public String updateBread(@ModelAttribute Bread bread){
 
-        breads.getBreads().stream().forEach(bread -> {
-            log.info("new breads are coming : " + bread);
-        });
-        model.addAttribute("breads",breads);
+        breadService.addBread(bread);
 
-
+        log.info(" bread for save "+bread);
         return "redirect:/save";
     }
 }

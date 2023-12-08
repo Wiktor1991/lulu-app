@@ -25,14 +25,9 @@ public class HomePageController {
     private final OrderService orderService;
 
     @GetMapping("/nav")
-    public String home(@RequestParam String tor, Model model){
+    public String home(){
 
-        List<Order> orders = orderService.findAll();
-        List<Order> ordersByTour = new ArrayList<>();
-        orders.stream().filter(order -> order.getClient().getTour().equals(tor))
-                        .forEach(ordersByTour::add);
-        model.addAttribute("clients", ordersByTour);
-        model.addAttribute("tor",tor);
+
         return "index";
     }
     @GetMapping("/")
@@ -45,13 +40,10 @@ public class HomePageController {
         model.addAttribute("tourNumber",string);
         return "tour";
     }
-    @PostMapping("/sa")
+    @PostMapping("/tour")
     public String tur(@RequestParam String tor, RedirectAttributes redirectAttributes){
-        redirectAttributes.addAttribute("tor", tor);
+        redirectAttributes.addAttribute("tourNumber", tor);
         log.info("data : " + tor);
-
-        return "redirect:/nav";
-
+        return "redirect:/clients";
     }
-
 }

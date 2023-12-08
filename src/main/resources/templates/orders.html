@@ -30,7 +30,7 @@
         <td th:text="*{orderList[__${itemStatus.index}__].bread.getName()}"></td>
         <td><img th:src="*{orderList[__${itemStatus.index}__].bread.getPicture()}" width="40px" height="40px"></td>
         <td th:text="*{orderList[__${itemStatus.index}__].bread.getArticleNumber()}"></td>
-        <td th:text="*{orderList[__${itemStatus.index}__].client.getName()}"></td>
+        <td th:name="client" th:text="*{orderList[__${itemStatus.index}__].client.getName()}"></td>
         <td><input th:field="*{orderList[__${itemStatus.index}__].orders[0]}" type="number" th:min="0"></td>
         <td><input th:field="*{orderList[__${itemStatus.index}__].orders[1]}" type="number" th:min="0"></td>
         <td><input th:field="*{orderList[__${itemStatus.index}__].orders[2]}" type="number" th:min="0"></td>

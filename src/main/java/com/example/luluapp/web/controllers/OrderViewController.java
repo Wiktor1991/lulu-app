@@ -1,5 +1,4 @@
 package com.example.luluapp.web.controllers;
-import com.example.luluapp.rest.models.Order;
 import com.example.luluapp.rest.service.OrderService;
 import com.example.luluapp.web.dto.OrderCreationDto;
 import lombok.extern.slf4j.Slf4j;
@@ -8,8 +7,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.List;
 
 
 @Controller
@@ -24,27 +24,23 @@ public class OrderViewController {
 
 
     @GetMapping("/orders")
-    public String getOrders(Model model) {
+    public String getOrders(Model model, @RequestParam String client) {
+
         OrderCreationDto orders = new OrderCreationDto();
-        orderService.findAll()
-                .iterator()
-                .forEachRemaining(orders::addOrder);
-
-        //have to  add switch for specific clients
-
-        OrderCreationDto edeka = new OrderCreationDto();
-
-       orders.getOrderList().stream().filter(order -> order.getClient().getName().equals("Edeka"))
-                       .forEach(order -> edeka.addOrder(order));
-
+        orderService.findAll().stream().filter(order -> order.getClient().getName().equals(client))
+                        .iterator()
+                                .forEachRemaining(orders::addOrder);
         model.addAttribute("orders", orders);
+        model.addAttribute("client", client);
         return "orders";
     }
 
     @PostMapping("/update")
-        public String update(@ModelAttribute OrderCreationDto orders){
+        public String update(@ModelAttribute OrderCreationDto orders, RedirectAttributes redirectAttributes){
+        String client =
+        orders.orderList.stream().findFirst().map(order -> order.getClient().getName()).orElse("");
 
-        orders.getOrderList().stream().forEach(System.out::println);
+        redirectAttributes.addAttribute("client", client);
 
         orders.getOrderList().forEach(order -> {
             orderService.addOrder(order);

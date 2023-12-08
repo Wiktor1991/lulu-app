@@ -43,6 +43,7 @@ public class DataInitializer {
                    .picture("https://img.rewe-static.de/4922239/5332540_digital-image.png?impolicy=s-products&imwidth=1080&output-format=image/webp")
                    .build();
 
+
            this.breadService.addBread(brot1);
            this.breadService.addBread(brot2);
            this.breadService.addBread(brot3);
@@ -70,7 +71,7 @@ public class DataInitializer {
         this.clientService.addClient(kaufland);
 
            int[] orders = {12,4,6,8,11,25};
-           int[] orders2 = {12,8,5,6,12,4};
+           int[] orders2 = {1,2,3,4,5,4};
            int[] orders3 = {2,8,5,2,3,4};
 
            Order ord1 = Order.builder()
@@ -80,7 +81,7 @@ public class DataInitializer {
                    .build();
 
            Order ord2 = Order.builder()
-                   .bread(brot2)
+                   .bread(brot1)
                    .client(rewe)
                    .orders(orders2)
                    .build();

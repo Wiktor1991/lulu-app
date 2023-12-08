@@ -4,10 +4,8 @@
     <meta charset="UTF-8">
     <title>Books</title>
 
-    <h1>Welcome to breads controller</h1>
-
-
-    <form th:object="${breads}" method="post" action="/edit">
+    <h1>Füllen Sie die Felder aus um einen neuen Artikel zu speichern</h1>
+    <form name="bread" th:object="${bread}" method="post" action="/edit">
         <fieldset>
             <input type="submit" id="submitButton" th:value="Save">
             <input type="reset" id="resetButton" name="reset" th:value="Reset"/>
@@ -16,12 +14,14 @@
                 <tr>
                     <th> Bezeichnung</th>
                     <th> Artikel</th>
+                    <th> Bild</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="bread, itemStat : *{breads}">
-                    <td><input th:field="*{breads[__${itemStat.index}__].name}" /></td>
-                    <td><input th:field="*{breads[__${itemStat.index}__].articleNumber}" /></td>
+                <tr>
+                    <td><input th:field="${bread.name}" /></td>
+                    <td><input th:field="${bread.articleNumber}" /></td>
+                    <td><input th:field="${bread.picture}" /></td>
                 </tr>
                 </tbody>
             </table>
