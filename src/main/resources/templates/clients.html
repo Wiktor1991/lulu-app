@@ -15,15 +15,28 @@
         width: 120px;
         height: 45px;
     }
+
+    table,
+    .container{
+        text-align: center;
+        margin: 20px auto;
+    }
+    header{
+        background-color: silver;
+    }
 </style>
-<h1>
-    Tour interface
-</h1>
+
 
 <body>
+<div class="container">
+    <header>
+<h1>
+    Kunden
+</h1>
 
 
 <h1 th:text="|Tour ${tourNumber}|"></h1>
+    </header>
 
 
 <table>
@@ -42,6 +55,7 @@
         </tbody>
     </form>
 </table>
+</div>
 
 
 </body>
