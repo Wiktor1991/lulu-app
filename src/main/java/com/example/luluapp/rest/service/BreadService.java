@@ -3,7 +3,6 @@ package com.example.luluapp.rest.service;
 import com.example.luluapp.rest.models.Bread;
 import com.example.luluapp.rest.repositories.BreadRepository;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
