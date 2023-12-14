@@ -1,10 +1,7 @@
 package com.example.luluapp.rest.restControllers;
 
-import com.example.luluapp.rest.models.Order;
-import com.example.luluapp.rest.service.OrderService;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import com.example.luluapp.rest.models.Tour;
+import com.example.luluapp.rest.service.TourService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,32 +11,22 @@ import java.util.List;
 @CrossOrigin("*")
 public class OrderRestController {
 
-    private final OrderService orderService;
+    private final TourService orderService;
 
-    public OrderRestController(OrderService orderService) {
+    public OrderRestController(TourService orderService) {
         this.orderService = orderService;
     }
     @GetMapping("/orders")
-    public List<Order> getAllOrders(){
-        return this.orderService.getAllOrders();
+    public List<Tour> getAllOrders(){
+        return this.orderService.findAll();
     }
     @GetMapping("orders/{id}")
-    public Order getById(@PathVariable Long id ){
+    public Tour getById(@PathVariable Long id ){
         return orderService.findById(id);
     }
 
-    @PatchMapping("orders/{id}")
-    public ResponseEntity<?> updateById(@RequestBody int[] orders,
-                                     @PathVariable Long id){
-        return ResponseEntity.status(203)
-                .body(orderService.updateListOf(id,orders));
-
-    }
 
 
-    @PostMapping("orders/{id}")
-    public Order updateOrder(@PathVariable Long id,
-                             @RequestBody Order order){
-        return orderService.updateOrderById(order);
-    }
+
+
 }

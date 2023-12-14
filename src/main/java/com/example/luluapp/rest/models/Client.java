@@ -6,12 +6,13 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 
 @Entity
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "CLIENTS")
 @Data
 public class Client {
 
@@ -20,8 +21,8 @@ public class Client {
     Long id;
     Long clientNumber;
     String name;
-    String city;
-    String tour;
 
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    List<Bread> breadList;
 }
 

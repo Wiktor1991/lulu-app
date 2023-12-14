@@ -4,6 +4,8 @@ import com.example.luluapp.rest.models.Client;
 import com.example.luluapp.rest.repositories.ClientRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ClientService {
 
@@ -17,5 +19,10 @@ public class ClientService {
     public void addClient(Client client){
         this.clientRepository.save(client);
 
+    }
+
+    public List<Client> saveAll(List<Client> clients) {
+
+        return clientRepository.saveAll(clients);
     }
 }

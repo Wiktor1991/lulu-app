@@ -22,4 +22,8 @@ public class BreadService {
     public List<Bread> getAllBreads() {
         return this.breadRepository.findAll();
     }
+
+    public void saveAll(List<Bread> breads) {
+        breadRepository.saveAll(breads);
+    }
 }

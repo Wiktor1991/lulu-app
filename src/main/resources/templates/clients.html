@@ -37,24 +37,26 @@
 
 <h1 th:text="|Tour ${tourNumber}|"></h1>
     </header>
+    <table>
+        <tr>
+            <td>Kunde</td>
+        </tr>
+        <form  th:object="${client} "action="/clients" method="post" th:each="client: ${clients}">
+
+            <tbody>
+            <td>
+                <input name="client" type="hidden" th:value="${client.name}">
+                <input name="tourNumber" type="hidden" th:value="${tourNumber}">
+                <button class="btn btn-secondary btn-lg btn-block" type="submit" th:text="${client.getName()}">
+                    Wähle
+                </button>
+            </td>
+            </tbody>
+        </form>
+    </table>
 
 
-<table>
-    <tr>
-        <td>Kunde</td>
-    </tr>
-    <form method="post" action="/clients" th:object="${client}" th:each="client: ${clients}">
 
-        <tbody>
-        <td>
-            <input th:name="client" type="hidden" th:value="${client.client.getName()}">
-            <button class="btn btn-secondary btn-lg btn-block" type="submit" th:text="${client.client.getName()}">
-                Wähle
-            </button>
-        </td>
-        </tbody>
-    </form>
-</table>
 </div>
 
 

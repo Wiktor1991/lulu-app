@@ -11,7 +11,11 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests(requests-> requests.anyRequest().authenticated());
+        http.authorizeHttpRequests(requests->{
+            requests.requestMatchers("/h2-console").permitAll();
+            requests.anyRequest().authenticated();
+        });
+
         http.formLogin(form->form.loginPage("/login").permitAll());
         http.logout(out-> out.logoutSuccessUrl("/"));
         http.csrf(csrf-> csrf.disable());

@@ -18,13 +18,31 @@
     table{
         margin: 0 auto;
         width: 20%;
-
     }
+
+    input{
+        width: 90%;
+        text-align: center;
+    }
+    h5,
+    h2{
+        text-align: center;
+        text-decoration: cadetblue;
+    }
+    label,
+    .week{
+        margin: 20px auto;
+        display: flex;
+        width: 50%;
+    }
+
 
 </style>
 <body>
-<h2> Bestellungen</h2>
-
+<h2  th:text="|Bestellungen für ${client.name}|" > Bestellungen</h2>
+<div class="week">
+    <label for="calenderWeek">Kalenderwoche </label><input class="week" form="form" id="calenderWeek" th:value="${calenderWeek}" type="week" >
+</div>
 
 <table>
     <thead>
@@ -32,7 +50,6 @@
         <td>Artikel</td>
         <td>Bild</td>
         <td>Bezeichnung</td>
-        <td>Kunde</td>
         <td>Montag</td>
         <td>Dienstag</td>
         <td>Mittwoch</td>
@@ -41,26 +58,28 @@
         <td>Samstag</td>
     </tr>
     </thead>
-    <form id="form" th:object="${orders}"  method="post" action="/update">
+    <form id="form" th:object="${breads}" method="post" action="/update">
         <fieldset>
-        <tbody th:each="order, itemStatus: *{orderList}">
-        <td th:text="*{orderList[__${itemStatus.index}__].bread.getName()}"></td>
-        <td><img th:src="*{orderList[__${itemStatus.index}__].bread.getPicture()}" width="40px" height="40px"></td>
-        <td th:text="*{orderList[__${itemStatus.index}__].bread.getArticleNumber()}"></td>
-        <td  th:name="client" th:text="*{orderList[__${itemStatus.index}__].client.getName()}"></td>
-        <td><input th:field="*{orderList[__${itemStatus.index}__].orders[0]}" type="number" th:min="0"></td>
-        <td><input th:field="*{orderList[__${itemStatus.index}__].orders[1]}" type="number" th:min="0"></td>
-        <td><input th:field="*{orderList[__${itemStatus.index}__].orders[2]}" type="number" th:min="0"></td>
-        <td><input th:field="*{orderList[__${itemStatus.index}__].orders[3]}" type="number" th:min="0"></td>
-        <td><input th:field="*{orderList[__${itemStatus.index}__].orders[4]}" type="number" th:min="0"></td>
-        <td><input th:field="*{orderList[__${itemStatus.index}__].orders[5]}" type="number" th:min="0"></td>
-        <td><input th:type="hidden" th:field="*{orderList[__${itemStatus.index}__].bread}" ></td>
-        <td><input th:type="hidden" th:field="*{orderList[__${itemStatus.index}__].client}" ></td>
-        <td class="sum" th:text="${#aggregates.sum(order.getOrders())}"></td>
-        <td><input th:type="hidden" th:field="*{orderList[__${itemStatus.index}__].id}" ></td>
+        <tbody th:each="bread, itemStatus:  *{breads}">
+        <td th:text="*{breads[__${itemStatus.index}__].articleNumber}"></td>
+        <td><img th:src="*{breads[__${itemStatus.index}__].picture}" width="40px" height="40px"></td>
+        <td th:text="*{breads[__${itemStatus.index}__].name}"></td>
+
+        <td><input th:field="*{breads[__${itemStatus.index}__].orders[0]}"></td>
+        <td><input th:field="*{breads[__${itemStatus.index}__].orders[1]}"></td>
+        <td><input th:field="*{breads[__${itemStatus.index}__].orders[2]}"></td>
+        <td><input th:field="*{breads[__${itemStatus.index}__].orders[3]}"></td>
+        <td><input th:field="*{breads[__${itemStatus.index}__].orders[4]}"></td>
+        <td><input th:field="*{breads[__${itemStatus.index}__].orders[5]}"></td>
+
+<!--        hiddenInputs-->
+        <input type="hidden", th:field="*{breads[__${itemStatus.index}__].id}">
+        <input type="hidden", th:field="*{breads[__${itemStatus.index}__].name}">
+        <input type="hidden", th:field="*{breads[__${itemStatus.index}__].picture}">
+        <input type="hidden", th:field="*{breads[__${itemStatus.index}__].articleNumber}">
+
+<!--        <td class="sum" th:text="${#aggregates.sum(order.getOrders())}"></td>-->
         </fieldset>
-
-
     </form>
     </tbody>
 </table>
