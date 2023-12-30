@@ -22,25 +22,10 @@
 <body class="p-3 m-0 border-0 bd-example m-0 border-0">
 
 <!-- Example Code -->
-
-<ul class="nav justify-content-center">
-    <li class="nav-item">
-        <a class="nav-link active" aria-current="page" href="/save">Neue artikel</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link active" aria-current="page" href="/out">Abmelden</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-    </li>
-</ul>
 <div class="container">
 <table>
     <tr>
-        <td>Tour</td>
+        <td>Bitte wählen sie Tour aus </td>
     </tr>
     <form th:object="${tourNumber}"  action="/go" method="post" th:each="tour: ${toures}">
 

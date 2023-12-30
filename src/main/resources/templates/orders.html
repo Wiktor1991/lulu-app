@@ -68,12 +68,12 @@
         <td><img th:src="*{breads[__${itemStatus.index}__].picture}" width="40px" height="40px"></td>
         <td th:text="*{breads[__${itemStatus.index}__].name}"></td>
 
-        <td><input th:field="*{breads[__${itemStatus.index}__].orders[0]}" type="number"></td>
-        <td><input th:field="*{breads[__${itemStatus.index}__].orders[1]}" type="number"></td>
-        <td><input th:field="*{breads[__${itemStatus.index}__].orders[2]}" type="number"></td>
-        <td><input th:field="*{breads[__${itemStatus.index}__].orders[3]}" type="number"></td>
-        <td><input th:field="*{breads[__${itemStatus.index}__].orders[4]}" type="number"></td>
-        <td><input th:field="*{breads[__${itemStatus.index}__].orders[5]}" type="number"></td>
+        <td><input th:field="*{breads[__${itemStatus.index}__].orders[0]}" type="number" min="0"></td>
+        <td><input th:field="*{breads[__${itemStatus.index}__].orders[1]}" type="number" min="0"></td>
+        <td><input th:field="*{breads[__${itemStatus.index}__].orders[2]}" type="number" min="0"></td>
+        <td><input th:field="*{breads[__${itemStatus.index}__].orders[3]}" type="number" min="0"></td>
+        <td><input th:field="*{breads[__${itemStatus.index}__].orders[4]}" type="number" min="0"></td>
+        <td><input th:field="*{breads[__${itemStatus.index}__].orders[5]}" type="number" min="0"></td>
 <!--        hiddenInputs-->
         <input type="hidden", th:field="*{breads[__${itemStatus.index}__].id}">
         <input type="hidden", th:field="*{breads[__${itemStatus.index}__].name}">
