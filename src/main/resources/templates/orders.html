@@ -14,6 +14,7 @@
     .myclass{
         width: 50%;
         margin: 10px auto;
+        text-align: center;
     }
     table{
         margin: 0 auto;
@@ -39,9 +40,11 @@
 
 </style>
 <body>
-<h2  th:text="|Bestellungen für ${client.name}|" > Bestellungen</h2>
+<h2 th:text="|Tour ${tourNumber}|"></h2>
+<h2  th:text="|Bestellungen für ${client.name} |" > Bestellungen</h2>
 <div class="week">
-    <label for="calenderWeek">Kalenderwoche </label><input class="week" form="form" id="calenderWeek" th:value="${calenderWeek}" type="week" >
+    <label for="calenderWeek">Kalenderwoche </label>
+    <input class="week" form="form" id="calenderWeek" type="week" >
 </div>
 
 <table>
@@ -65,18 +68,21 @@
         <td><img th:src="*{breads[__${itemStatus.index}__].picture}" width="40px" height="40px"></td>
         <td th:text="*{breads[__${itemStatus.index}__].name}"></td>
 
-        <td><input th:field="*{breads[__${itemStatus.index}__].orders[0]}"></td>
-        <td><input th:field="*{breads[__${itemStatus.index}__].orders[1]}"></td>
-        <td><input th:field="*{breads[__${itemStatus.index}__].orders[2]}"></td>
-        <td><input th:field="*{breads[__${itemStatus.index}__].orders[3]}"></td>
-        <td><input th:field="*{breads[__${itemStatus.index}__].orders[4]}"></td>
-        <td><input th:field="*{breads[__${itemStatus.index}__].orders[5]}"></td>
-
+        <td><input th:field="*{breads[__${itemStatus.index}__].orders[0]}" type="number" min="0"></td>
+        <td><input th:field="*{breads[__${itemStatus.index}__].orders[1]}" type="number" min="0"></td>
+        <td><input th:field="*{breads[__${itemStatus.index}__].orders[2]}" type="number" min="0"></td>
+        <td><input th:field="*{breads[__${itemStatus.index}__].orders[3]}" type="number" min="0"></td>
+        <td><input th:field="*{breads[__${itemStatus.index}__].orders[4]}" type="number" min="0"></td>
+        <td><input th:field="*{breads[__${itemStatus.index}__].orders[5]}" type="number" min="0"></td>
 <!--        hiddenInputs-->
         <input type="hidden", th:field="*{breads[__${itemStatus.index}__].id}">
         <input type="hidden", th:field="*{breads[__${itemStatus.index}__].name}">
         <input type="hidden", th:field="*{breads[__${itemStatus.index}__].picture}">
         <input type="hidden", th:field="*{breads[__${itemStatus.index}__].articleNumber}">
+
+
+        <input type="hidden", name="client" th:value="${client.id}">
+        <input type="hidden", name="tourNumber" th:value="${tourNumber}">
 
 <!--        <td class="sum" th:text="${#aggregates.sum(order.getOrders())}"></td>-->
         </fieldset>
@@ -84,13 +90,25 @@
     </tbody>
 </table>
 
+<div class="myclass" th:if="${isSaved}">
+    <h1> Eingaben gespeichert !</h1>
+
+</div>
+
 
 
 
 
 <footer>
-    <button form="form" type="submit" class="btn btn-secondary btn-lg btn-block myclass" >Speichern</button>
-    <a th:href="@{/}"  type="submit" class="btn btn-secondary btn-lg btn-block myclass">Zurück</a>
+    <button th:if="${!isSaved} "form="form" type="submit" class="btn btn-secondary btn-lg btn-block myclass" >Speichern</button>
+    <form th:object="${tourNumber}" action="/go" method="post" >
+        <input type="hidden" name="number" th:value="${tourNumber}">
+
+    </form>
+    <form method="post" action="/change" th:object="${tourNumber}" >
+        <input type="hidden" name="tourNumber" th:value="${tourNumber}">
+        <button type="submit" class="btn btn-secondary btn-lg btn-block myclass" >Zurück</button>
+    </form>
 </footer>
 </body>
 </html>

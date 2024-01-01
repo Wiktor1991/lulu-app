@@ -124,7 +124,6 @@ public class DataInitializer {
 
         tourService.save(ord2);
         tourService.save(ord3);
-
         tourService.save(ord);
        }
 }

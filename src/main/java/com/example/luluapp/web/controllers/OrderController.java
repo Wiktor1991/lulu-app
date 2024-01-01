@@ -10,6 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 @Controller
@@ -20,6 +22,8 @@ public class OrderController {
 
     private final BreadService breadService;
 
+    private boolean isSaved;
+
 
     public OrderController(TourService tourService, BreadService breadService) {
         this.tourService = tourService;
@@ -27,45 +31,60 @@ public class OrderController {
     }
 
     @GetMapping("/orders")
-    public String orders(@ModelAttribute (name = "client") String client,
+    public String orders(@ModelAttribute (name = "client") Long clientId,
                          @ModelAttribute(name ="tourNumber") String tourNumber,
                          Model model){
         BreadCreationDto breadCreationDto = new BreadCreationDto();
-        String calenderWeek ="";
-
         log.info(tourNumber+"***************");
-        log.info(client+"***************");
+        log.info(clientId+"***************");
 
         Tour choosedTour = tourService.findAll().stream()
                 .filter(tour -> tour.getTourNumber().equals(tourNumber)).findFirst().orElseThrow();
 
         Client choosedClient = choosedTour.getClients().stream()
-                .filter(client2 -> client2.getName().equals(client)).findFirst().orElseThrow();
+                .filter(client2 -> client2.getId().equals(clientId)).findFirst().orElseThrow();
 
-        choosedClient.getBreadList().forEach(bread -> breadCreationDto.addBread(bread));
+        choosedClient.getBreadList().forEach(breadCreationDto::addBread);
 
 
         breadCreationDto.getBreads().forEach(System.out::println);
+        log.info("***** is saved from GET mapping " + isSaved);
 
         model.addAttribute("client",choosedClient);
         model.addAttribute("breads",breadCreationDto);
-        model.addAttribute("calenderWeek", calenderWeek);
+        model.addAttribute("isSaved", isSaved);
 
 
         return "orders";
-
-
     }
     @PostMapping("/update")
     public String updateOrders(@ModelAttribute(name = "breads") BreadCreationDto breadCreationDto,
-                               @ModelAttribute(name ="calenderWeek") String calenderWeek){
+                               @ModelAttribute(name ="calenderWeek") String calenderWeek,
+                               @ModelAttribute(name = "client") Long clientId,
+                               @ModelAttribute(name = "tourNumber") String tourNumber,
+                               RedirectAttributes redirectAttributes){
 
-        System.out.println(calenderWeek + "***************************");
 
         log.info(breadCreationDto.getBreads().toString());
-
         breadService.saveAll(breadCreationDto.getBreads());
+        isSaved = true;
+        log.info("******** is saved from POST mapping " +isSaved);
 
-        return "home";
+        log.info("****** "+ clientId);
+
+        redirectAttributes.addAttribute("client", clientId);
+        redirectAttributes.addAttribute("tourNumber", tourNumber);
+        return "redirect:/orders";
+
+//        return "home";
     }
+
+    @PostMapping("/change")
+    public String changeStatus(@ModelAttribute(name = "tourNumber") String tourNumber,
+                               RedirectAttributes redirectAttributes){
+        isSaved = false;
+        redirectAttributes.addAttribute("tourNumber", tourNumber);
+        return "redirect:/clients";
+    }
+
 }

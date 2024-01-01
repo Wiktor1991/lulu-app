@@ -21,6 +21,9 @@
         text-align: center;
         margin: 20px auto;
     }
+    .footer{
+        margin-top: 100px;
+    }
     header{
         background-color: silver;
     }
@@ -39,13 +42,13 @@
     </header>
     <table>
         <tr>
-            <td>Kunde</td>
+            <td>Bitte wählen Sie Kunde aus</td>
         </tr>
         <form  th:object="${client} "action="/clients" method="post" th:each="client: ${clients}">
 
             <tbody>
             <td>
-                <input name="client" type="hidden" th:value="${client.name}">
+                <input name="client" type="hidden" th:value="${client.id}">
                 <input name="tourNumber" type="hidden" th:value="${tourNumber}">
                 <button class="btn btn-secondary btn-lg btn-block" type="submit" th:text="${client.getName()}">
                     Wähle
@@ -54,10 +57,9 @@
             </tbody>
         </form>
     </table>
-
-
-
+<a th:href="@{/}" class="btn btn-secondary btn-lg btn-block footer" > Zurück </a>
 </div>
+
 
 
 </body>

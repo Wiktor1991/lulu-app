@@ -39,15 +39,16 @@ public class ClientController {
     }
 
     @PostMapping("/clients")
-    public String chooseClient(@ModelAttribute(name = "client") String client,
+    public String chooseClient(@ModelAttribute(name = "client") Long clientId,
                                @ModelAttribute(name="tourNumber") String tourNumber,
                                RedirectAttributes redirectAttributes){
 
-        log.info("************" + client);
+        log.info("************" + clientId);
         log.info("***********" + tourNumber);
-        redirectAttributes.addAttribute("client",client);
+        redirectAttributes.addAttribute("client",clientId);
         redirectAttributes.addAttribute("tourNumber",tourNumber);
         return "redirect:/orders";
 
     }
+
 }
