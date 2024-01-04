@@ -2,21 +2,25 @@
 <html lang="de" xmlns:th="http://www.thymeleaf.org" >
 <head>
     <meta charset="utf-8">
+    <title>Touren</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
-    <title>Bootstrap Example</title>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <style>
     button{
-        width: 120px;
+        width: 300px;
         height: 45px;
+        margin-bottom: 10px;
     }
     table,
     .container{
         margin: 20px auto;
         text-align: center;
+    }
+    .container{
+        background-image: url("https://www.harry-brot.de/fileadmin/user_upload/Harry_Brot_Die_Harry_Story.jpeg");
     }
 </style>
 <body class="p-3 m-0 border-0 bd-example m-0 border-0">
@@ -25,7 +29,7 @@
 <div class="container">
 <table>
     <tr>
-        <td>Bitte wählen sie Tour aus </td>
+        <td><h2>Bitte wählen sie Tour aus</h2> </td>
     </tr>
     <form th:object="${tourNumber}"  action="/go" method="post" th:each="tour: ${toures}">
 
@@ -37,7 +41,9 @@
         </tbody>
     </form>
 </table>
+    <a th:href="@{/}" class="btn btn-secondary btn-lg btn-block footer" > Zurück </a>
 </div>
+
 
 <!-- End Example Code -->
 </body>

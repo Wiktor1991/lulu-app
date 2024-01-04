@@ -19,6 +19,4 @@ public class Tour {
     @OneToMany(fetch = FetchType.EAGER)
     List<Client> clients;
 
-
-
 }

@@ -7,11 +7,13 @@ import com.example.luluapp.rest.service.BreadService;
 import com.example.luluapp.rest.service.ClientService;
 import com.example.luluapp.rest.service.TourService;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Component
+@Profile("dev")
 public class DataInitializer {
     private final BreadService breadService;
     private final ClientService clientService;
@@ -24,10 +26,17 @@ public class DataInitializer {
     }
 
 
+
     public List<Bread> breads() {
 
         int[] orders = {1,1,2,6,8,9};
         int[] orders2 = {7,7,4,5,6,9};
+        Bread brot0 = Bread.builder()
+                .articleNumber(56)
+                .name("Buttertoast500")
+                .picture("https://img.rewe-static.de/4922441/3488840_digital-image.png?output-quality=60&fit=inside|1200:1200&output-format=image/webp&background-color=ffffff")
+                .orders(orders)
+                .build();
 
            Bread brot1 = Bread.builder()
                    .articleNumber(67)
@@ -39,8 +48,9 @@ public class DataInitializer {
            Bread brot2 = Bread.builder()
                    .orders(orders2)
                    .articleNumber(64)
-                   .name("volkorntoast")
-                   .picture("https://img.rewe-static.de/4922506/3488850_digital-image.png?impolicy=s-products&imwidth=1080&output-format=image/webp").build();
+                   .name("Volkorntoast")
+                   .picture("https://img.re" +
+                           "we-static.de/4922506/3488850_digital-image.png?impolicy=s-products&imwidth=1080&output-format=image/webp").build();
 
            Bread brot3 = Bread.builder()
                    .orders(orders)
@@ -48,7 +58,28 @@ public class DataInitializer {
                    .name("Weissbrot750")
                    .picture("https://img.rewe-static.de/4922239/5332540_digital-image.png?impolicy=s-products&imwidth=1080&output-format=image/webp")
                    .build();
-           return List.of(brot1,brot2,brot3);
+
+           Bread brot4 = Bread.builder()
+                   .articleNumber(82)
+                   .orders(orders)
+                   .name("Das Korn An Korn")
+                   .picture("https://img.rewe-static.de/4922298/33064038_digital-image.png?output-quality=60&fit=inside|1200:1200&output-format=image/webp&background-color=ffffff")
+                   .build();
+
+           Bread bread5 = Bread.builder()
+                   .orders(orders2)
+                   .articleNumber(76)
+                   .name("1688 Katen")
+                   .picture("https://img.rewe-static.de/4923022/915000_digital-image.png?output-quality=60&fit=inside|1200:1200&output-format=image/webp&background-color=ffffff")
+                   .build();
+
+           Bread bread6 = Bread.builder()
+                   .orders(orders)
+                   .articleNumber(3450)
+                   .name("Vollkorn Urtyp")
+                   .picture("https://img.rewe-static.de/2306453/23255802_digital-image.png?output-quality=60&fit=inside|1200:1200&output-format=image/webp&background-color=ffffff")
+                   .build();
+           return List.of(brot0,brot1,brot2,brot3,brot4, bread5,bread6);
        }
        public List<Bread> breads1(){
 
@@ -57,16 +88,50 @@ public class DataInitializer {
         Bread br = Bread.builder()
                 .name("Vitamin400")
                 .articleNumber(4953)
-                .picture("ssad")
+                .picture("https://img.rewe-static.de/8350727/29889927_digital-image.png?output-quality=60&fit=inside|1200:1200&output-format=image/webp&background-color=ffffff")
                 .orders(orders)
                 .build();
         Bread br2 = Bread.builder()
                 .name("VitalFit500")
                 .articleNumber(101)
-                .picture("saa")
+                .picture("https://img.rewe-static.de/0554637/2510520_digital-image.png?output-quality=60&fit=inside|1200:1200&output-format=image/webp&background-color=ffffff")
                 .orders(orders2)
                 .build();
-        return List.of(br,br2);
+
+        Bread br3 = Bread.builder()
+                .name("Steinofenbrot500")
+                .articleNumber(85)
+                .picture("https://img.rewe-static.de/4923456/3341460_digital-image.png?output-quality=60&fit=inside|1200:1200&output-format=image/webp&background-color=ffffff")
+                .orders(orders2)
+                .build();
+
+        Bread br4 = Bread.builder()
+                .orders(orders2)
+                .articleNumber(437)
+                .name("Baef.Krustenbrot500")
+                .picture("https://img.rewe-static.de/1049488/2428210_digital-image.png?output-quality=60&fit=inside|1200:1200&output-format=image/webp&background-color=ffffff")
+                .build();
+        Bread br5 = Bread.builder()
+                .orders(orders)
+                .name("Baef.WeltmeisterMehrkorn")
+                .articleNumber(3487)
+                .picture("https://img.rewe-static.de/2402113/23851982_digital-image.png?output-quality=60&fit=inside|1200:1200&output-format=image/webp&background-color=ffffff")
+                .build();
+        Bread br6 = Bread.builder()
+                .orders(orders)
+                .name("Baef. MalzMehrkorn")
+                .articleNumber(366)
+                .picture("https://img.rewe-static.de/0483109/1608030_digital-image.png?output-quality=60&fit=inside|1200:1200&output-format=image/webp&background-color=ffffff")
+                .build();
+
+        Bread br7 = Bread.builder()
+                .orders(orders)
+                .name("Sonnekern500")
+                .articleNumber(90)
+                .picture("https://img.rewe-static.de/4922328/3873200_digital-image.png?output-quality=60&fit=inside|1200:1200&output-format=image/webp&background-color=ffffff")
+
+                .build();
+        return List.of(br,br2, br3,br4,br5,br6,br7);
        }
 
        public List<Client> clients(){
