@@ -10,39 +10,45 @@
 </head>
 
 <style>
-    button {
-        width: 120px;
-        height: 45px;
+    a{
+        width: 200px;
+        height: 50px;
+        margin: 10px auto;
     }
 
     .container {
         text-align: center;
-        margin:  auto;
+        margin: auto;
         background-image: url("https://www.harry-brot.de/fileadmin/user_upload/Harry_Brot_Unsere_Produkte_Brotgenuss.jpg");
         height: 400px;
         background-position: center;
         background-size: auto;
     }
-    header{
+    .navbar,
+    .header {
         margin: auto auto;
+        width: 300px;
+    }
+    .pic{
+        margin: auto auto;
+        height: 150px;
     }
 </style>
 
 
 <div class="container">
+    <div class="header">
+            <img class="pic" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTp2AHA456kFRTQEyICWTxzpdauFyshsWDFQA&usqp=CAU">
+    </div>
 
-    <header><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTp2AHA456kFRTQEyICWTxzpdauFyshsWDFQA&usqp=CAU"></header>
 
     <body>
 
-    <div>
+    <div class="navbar">
         <nav>
-
             <a th:href="@{/tour}" class="btn btn-secondary btn-lg btn-block" type="submit">Bestellen</a>
             <a th:href="@{/out}" class="btn btn-secondary btn-lg btn-block" type="submit">Abmelden</a>
             <a th:href="@{/info}" class="btn btn-secondary btn-lg btn-block" type="submit">Info</a>
-
-
         </nav>
     </div>
     </body>
