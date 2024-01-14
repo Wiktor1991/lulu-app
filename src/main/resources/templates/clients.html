@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=320, initial-scale=2.3, user-scalable=no">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
@@ -16,7 +16,6 @@
         width: 300px;
         height: 45px;
         margin-bottom: 10px;
-
     }
 
     table,
@@ -25,11 +24,11 @@
         margin: 20px auto;
     }
 
-    .container{
+    .container {
         background-image: url("https://www.harry-brot.de/fileadmin/user_upload/Harry_Brot_Die_Harry_Story.jpeg");
-
     }
-    .footer{
+
+    .footer {
         margin-top: 100px;
     }
 
@@ -39,31 +38,26 @@
 <body>
 <div class="container">
     <header>
-
-
-
-<h1 th:text="|Tour ${tourNumber}|"></h1>
+        <h1 th:text="|Tour ${tourNumber}|"></h1>
     </header>
     <table>
         <tr>
             <td><h2>Bitte wählen Sie Kunde aus</h2></td>
         </tr>
-        <form  th:object="${client} "action="/clients" method="post" th:each="client: ${clients}">
+        <form th:object="${client} " action="/clients" method="post" th:each="client: ${clients}">
 
             <tbody>
             <td>
                 <input name="client" type="hidden" th:value="${client.id}">
                 <input name="tourNumber" type="hidden" th:value="${tourNumber}">
-                <button class="btn btn-secondary btn-lg btn-block" type="submit" th:text="${client.getName()}">
-                    Wähle
+                <button class="btn btn-secondary btn-lg btn-block" type="submit" th:text="${client.getName()}">Wähle
                 </button>
             </td>
             </tbody>
         </form>
     </table>
-<a th:href="@{/}" class="btn btn-secondary btn-lg btn-block footer" > Zurück </a>
+    <a th:href="@{/}" class="btn btn-secondary btn-lg btn-block footer"> Zurück </a>
 </div>
-
 
 
 </body>

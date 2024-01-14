@@ -1,47 +1,59 @@
 <!doctype html >
-<html lang="de" xmlns:th="http://www.thymeleaf.org" >
+<html lang="de" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
-    <title>Touren</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <title>Touren</title>
 </head>
+
 <style>
-    button{
-        width: 300px;
+    button {
+        width: 250px;
         height: 45px;
         margin-bottom: 10px;
     }
+
     table,
-    .container{
-        margin: 20px auto;
+    .container {
         text-align: center;
+        margin:  auto;
     }
-    .container{
+
+    .container {
         background-image: url("https://www.harry-brot.de/fileadmin/user_upload/Harry_Brot_Die_Harry_Story.jpeg");
+
+    }
+
+    .footer {
+        margin-top: 100px;
     }
 </style>
 <body class="p-3 m-0 border-0 bd-example m-0 border-0">
 
 <!-- Example Code -->
 <div class="container">
-<table>
-    <tr>
-        <td><h2>Bitte wählen sie Tour aus</h2> </td>
-    </tr>
-    <form th:object="${tourNumber}"  action="/go" method="post" th:each="tour: ${toures}">
+    <header>
+        <h1>Bitte wählen Sie Tour aus</h1>
+    </header>
+    <table>
+        <!--    <tr>-->
+        <!--        <td><h2>Bitte wählen sie Tour aus</h2> </td>-->
+        <!--    </tr>-->
+        <form th:object="${tourNumber}" action="/go" method="post" th:each="tour: ${toures}">
 
-        <tbody>
-        <td>
-            <input type="hidden" name="number" th:value="${tour.tourNumber}">
-            <button class="btn btn-secondary btn-lg btn-block" type="submit" th:text="${tour.tourNumber}">Wähle</button>
-        </td>
-        </tbody>
-    </form>
-</table>
-    <a th:href="@{/}" class="btn btn-secondary btn-lg btn-block footer" > Zurück </a>
+            <tbody>
+            <td>
+                <input type="hidden" name="number" th:value="${tour.tourNumber}">
+                <button class="btn btn-secondary btn-lg btn-block" type="submit" th:text="${tour.tourNumber}">Wähle
+                </button>
+            </td>
+            </tbody>
+        </form>
+    </table>
+    <a th:href="@{/}" class="btn btn-secondary btn-lg btn-block footer"> Zurück </a>
 </div>
 
 
