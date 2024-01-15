@@ -35,6 +35,10 @@
         display: flex;
         width: 50%;
     }
+    .sum{
+        background-color: lightslategray;
+    }
+
 
 
 </style>
@@ -58,6 +62,7 @@
         <td>Donnerstag</td>
         <td>Freitag</td>
         <td>Samstag</td>
+        <td>Gesamt</td>
     </tr>
     </thead>
     <form id="form" th:object="${breads}" method="post" action="/update">
@@ -67,12 +72,12 @@
         <td><img th:src="*{breads[__${itemStatus.index}__].picture}" width="40px" height="40px"></td>
         <td th:text="*{breads[__${itemStatus.index}__].name}"></td>
 
-        <td><input th:field="*{breads[__${itemStatus.index}__].orders[0]}" type="number" min="0"></td>
-        <td><input th:field="*{breads[__${itemStatus.index}__].orders[1]}" type="number" min="0"></td>
-        <td><input th:field="*{breads[__${itemStatus.index}__].orders[2]}" type="number" min="0"></td>
-        <td><input th:field="*{breads[__${itemStatus.index}__].orders[3]}" type="number" min="0"></td>
-        <td><input th:field="*{breads[__${itemStatus.index}__].orders[4]}" type="number" min="0"></td>
-        <td><input th:field="*{breads[__${itemStatus.index}__].orders[5]}" type="number" min="0"></td>
+        <td><input onclick="this.select()" th:field="*{breads[__${itemStatus.index}__].orders[0]}" type="number" min="0"></td>
+        <td><input onclick="this.select()" th:field="*{breads[__${itemStatus.index}__].orders[1]}" type="number" min="0"></td>
+        <td><input onclick="this.select()" th:field="*{breads[__${itemStatus.index}__].orders[2]}" type="number" min="0"></td>
+        <td><input onclick="this.select()" th:field="*{breads[__${itemStatus.index}__].orders[3]}" type="number" min="0"></td>
+        <td><input onclick="this.select()" th:field="*{breads[__${itemStatus.index}__].orders[4]}" type="number" min="0"></td>
+        <td><input onclick="this.select()" th:field="*{breads[__${itemStatus.index}__].orders[5]}" type="number" min="0"></td>
 <!--        hiddenInputs-->
         <input type="hidden", th:field="*{breads[__${itemStatus.index}__].id}">
         <input type="hidden", th:field="*{breads[__${itemStatus.index}__].name}">
@@ -83,7 +88,7 @@
         <input type="hidden", name="client" th:value="${client.id}">
         <input type="hidden", name="tourNumber" th:value="${tourNumber}">
 
-<!--        <td class="sum" th:text="${#aggregates.sum(order.getOrders())}"></td>-->
+        <td class="sum" th:text="|&emsp; ${#aggregates.sum(bread.getOrders())}|"></td>
         </fieldset>
     </form>
     </tbody>
@@ -91,7 +96,6 @@
 
 <div class="myclass" th:if="${isSaved}">
     <h1> Eingaben gespeichert !</h1>
-
 </div>
 
 
@@ -99,7 +103,7 @@
 
 
 <footer>
-    <button th:if="${!isSaved} "form="form" type="submit" class="btn btn-secondary btn-lg btn-block myclass" >Speichern</button>
+    <button form="form" type="submit" class="btn btn-secondary btn-lg btn-block myclass" >Speichern</button>
     <form th:object="${tourNumber}" action="/go" method="post" >
         <input type="hidden" name="number" th:value="${tourNumber}">
 

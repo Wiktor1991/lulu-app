@@ -149,7 +149,26 @@ public class DataInitializer {
         clientService.saveAll(List.of(client1,client));
 
         return List.of(client1,client);
+       }
+       public List<Client> clients1(){
+        Client cl1 = Client.builder()
+                .name("Rewe Adolf")
+                .clientNumber(26456991L)
+                .breadList(breads())
+                .build();
+        Client cl2 = Client.builder()
+                .name("Rewe Tydecks")
+                .clientNumber(568429961L)
+                .breadList(breads())
+                .build();
+        Client cl3 = Client.builder()
+                .name("Kaufland Ost")
+                .clientNumber(59461164L)
+                .breadList(breads1())
 
+                .build();
+        clientService.saveAll(List.of(cl3,cl2,cl1));
+        return List.of(cl1,cl2,cl3);
        }
 
        public List<Client> clients2(){
@@ -174,7 +193,7 @@ public class DataInitializer {
     public void addOrder(){
         Tour ord = Tour.builder()
                 .tourNumber("97")
-                .clients(clients())
+                .clients(clients1())
                 .build();
 
         Tour ord2 = Tour.builder()
